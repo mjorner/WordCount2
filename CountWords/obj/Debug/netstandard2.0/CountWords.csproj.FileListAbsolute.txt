@@ -1,0 +1,8 @@
+/home/patrik/CountWords2/src/CountWords/bin/Debug/netstandard2.0/CountWords.deps.json
+/home/patrik/CountWords2/src/CountWords/bin/Debug/netstandard2.0/CountWords.dll
+/home/patrik/CountWords2/src/CountWords/bin/Debug/netstandard2.0/CountWords.pdb
+/home/patrik/CountWords2/src/CountWords/obj/Debug/netstandard2.0/CountWords.csproj.CoreCompileInputs.cache
+/home/patrik/CountWords2/src/CountWords/obj/Debug/netstandard2.0/CountWords.AssemblyInfoInputs.cache
+/home/patrik/CountWords2/src/CountWords/obj/Debug/netstandard2.0/CountWords.AssemblyInfo.cs
+/home/patrik/CountWords2/src/CountWords/obj/Debug/netstandard2.0/CountWords.dll
+/home/patrik/CountWords2/src/CountWords/obj/Debug/netstandard2.0/CountWords.pdb
