@@ -6,13 +6,12 @@ using System.Text;
 namespace CountWords {
     public sealed class WordCounter {
         public bool OrderByDescending { get; set; } = true;
+        public bool MatchCase { get; set; } = false;
 
         private readonly ICharacterReader Reader;
-        private bool MatchCase;
-        public WordCounter(ICharacterReader reader, bool matchCase) {
+        public WordCounter(ICharacterReader reader) {
             if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
             Reader = reader;
-            MatchCase = matchCase;
         }
 
         public WordCount[] Parse() {
