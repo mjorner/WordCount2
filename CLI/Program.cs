@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using CountWords;
-
+using System.Diagnostics;
 
 namespace CountWords.CLI {
     public sealed class Program {
         public static void Main(string[] args) {
+            Stopwatch sw = new Stopwatch();
             Console.Write("Enter path: ");
             string path = Console.ReadLine();
             try {
+                sw.Start();
                 using (ICharacterReader reader = WordCounter.CreateFileReader(path)) {
-                    IWordCount[] wordCounts = WordCounter.CountWords(reader);   
-                    PrintWordCounts(wordCounts);
+                    IWordCount[] wordCounts = WordCounter.CountWords(reader);
+                    sw.Stop();  
+                    PrintWordCounts(wordCounts, sw);
+
                 }
             }
             catch (Exception e) {
@@ -21,23 +25,25 @@ namespace CountWords.CLI {
             try {
                 Console.Write("Enter string:");
                 string str = Console.ReadLine();
+                sw.Restart();
                 using (ICharacterReader reader = WordCounter.CreateStringReader(str)) {
                     IWordCount[] wordCounts = WordCounter.CountWords(reader);
-                    PrintWordCounts(wordCounts);
+                    sw.Stop();
+                    PrintWordCounts(wordCounts, sw);
                 }
             }
             catch (Exception e) {
                 Console.WriteLine(e.Message);
             }
-            
         }
-        private static void PrintWordCounts(IWordCount[] wordCounts) {
+        private static void PrintWordCounts(IWordCount[] wordCounts, Stopwatch sw) {
             long totalWordCount = 0;
             foreach(var word in wordCounts) {
                 Console.WriteLine(word);
                 totalWordCount += word.Count;
             }
             Console.WriteLine($"Total word count: {totalWordCount}");
+            Console.WriteLine($"Text parsed in {sw.Elapsed.Milliseconds}ms");
         }
     }
 }
