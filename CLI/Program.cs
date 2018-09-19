@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CountWords;
 
 
-namespace CountWords {
+namespace CountWords.CLI {
     public sealed class Program {
         public static void Main(string[] args) {
             Console.Write("Enter path: ");

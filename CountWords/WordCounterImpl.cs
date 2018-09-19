@@ -26,26 +26,35 @@ namespace CountWords {
                 }
                 if (character.IsWordEndingCharacter()) {
                     string word = stringBuilder.ToString();
-                    if (word.IsValidWord()) {
-                        WordCount wordCount;
-                        if (wordCounts.TryGetValue(word, out wordCount)) {
-                            wordCount.IncrementCount();
-                        }
-                        else {
-                            wordCounts[word] = new WordCount(word);
-                        }
-                    }
+                    TryAddWord(wordCounts, word);
                     stringBuilder.Clear();
                 }
                 else {
                     stringBuilder.Append(character);
                 }
             }
+            
+            TryAddWord(wordCounts, stringBuilder.ToString());
+
             if (OrderByDescending) {
                 return wordCounts.OrderByDescending(x=> x.Value.Count).Select(x=> x.Value).ToArray();
             }
             else {
                 return wordCounts.Values.ToArray();
+            }
+        }
+
+        //What we could do is to encapsulate this part in its own class.
+        //With a custom TryAddWord.
+        private static void TryAddWord(IDictionary<string, WordCount> wordCounts, string word) {
+            if (word.IsValidWord()) {
+                WordCount wordCount;
+                if (wordCounts.TryGetValue(word, out wordCount)) {
+                    wordCount.IncrementCount();
+                }
+                else {
+                    wordCounts[word] = new WordCount(word);
+                }
             }
         }
     }

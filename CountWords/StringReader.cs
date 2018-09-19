@@ -6,9 +6,6 @@ namespace CountWords {
         private int Position;
         public StringReader(string str) {
             if (str == null) { throw new ArgumentNullException(nameof(str)); }
-            if (str.Any() && !str.Last().IsWordEndingCharacter()) {
-                str += '\0';
-            }
             SourceString = str;
             Position = 0;
         }
