@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -15,7 +14,7 @@ namespace CountWords {
         }
 
         public IWordCount[] Parse() {
-            Dictionary<string, WordCount> wordCounts = new Dictionary<string, WordCount>();
+            WordCountContainer wordCounts = new WordCountContainer();
 
             Reader.ResetStream();
             StringBuilder stringBuilder = new StringBuilder();
@@ -26,7 +25,7 @@ namespace CountWords {
                 }
                 if (character.IsWordEndingCharacter()) {
                     string word = stringBuilder.ToString();
-                    TryAddWord(wordCounts, word);
+                    wordCounts.TryAddWord(word);
                     stringBuilder.Clear();
                 }
                 else {
@@ -34,27 +33,13 @@ namespace CountWords {
                 }
             }
             
-            TryAddWord(wordCounts, stringBuilder.ToString());
+            wordCounts.TryAddWord(stringBuilder.ToString());
 
             if (OrderByDescending) {
-                return wordCounts.OrderByDescending(x=> x.Value.Count).Select(x=> x.Value).ToArray();
+                return wordCounts.OrderByDescending(x=> x.Count).ToArray();
             }
             else {
-                return wordCounts.Values.ToArray();
-            }
-        }
-
-        //What we could do is to encapsulate this part in its own class.
-        //With a custom TryAddWord.
-        private static void TryAddWord(IDictionary<string, WordCount> wordCounts, string word) {
-            if (word.IsValidWord()) {
-                WordCount wordCount;
-                if (wordCounts.TryGetValue(word, out wordCount)) {
-                    wordCount.IncrementCount();
-                }
-                else {
-                    wordCounts[word] = new WordCount(word);
-                }
+                return wordCounts.ToArray();
             }
         }
     }
