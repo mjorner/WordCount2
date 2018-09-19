@@ -16,7 +16,7 @@ namespace CountWords.Tests {
         }
 
         [Fact]
-        public void TestDuplicates() {
+        public void TestDuplicatesWithQuotes() {
             using (var reader = WordCounter.CreateStringReader("is \"is\" \'is\' is is")) {
                 var result = WordCounter.CountWords(reader);
                 Assert.True(result.Length == 1);
