@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 namespace CountWords {
-    public sealed class StringReader : ICharacterReader {
+    internal sealed class StringReader : ICharacterReader {
         private readonly string SourceString;
         private int Position;
         public StringReader(string str) {

@@ -2,7 +2,7 @@ using System;
 using System.IO;
 
 namespace CountWords {
-    public sealed class FileReader : ICharacterReader {
+    internal sealed class FileReader : ICharacterReader {
         private readonly StreamReader StreamReader;
         private FileReader(string path) {
             StreamReader = new StreamReader(path);
