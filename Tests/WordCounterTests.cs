@@ -81,6 +81,14 @@ namespace CountWords.Tests {
         }
 
         [Fact]
+        public void TestJapanese() {
+            using (var reader = WordCounter.CreateStringReader("まあ。私たちはものをテストしています。")) {
+                var result = WordCounter.CountWords(reader, matchCase:true);
+                Assert.True(result.Length == 2);
+            }
+        }
+
+        [Fact]
         public void TestOrderDescendingAsDefault() {
             using (var reader = WordCounter.CreateStringReader("one two two")) {
                 var result = WordCounter.CountWords(reader);
