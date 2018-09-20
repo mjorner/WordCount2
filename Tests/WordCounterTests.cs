@@ -41,10 +41,18 @@ namespace CountWords.Tests {
         }
 
         [Fact]
-        public void TestMixed() {
-            using (var reader = WordCounter.CreateStringReader("---WORLD-CHAMPION---")) {
+        public void TestHyphens() {
+            using (var reader = WordCounter.CreateStringReader("an up-to-date account")) {
                 var result = WordCounter.CountWords(reader);
-                Assert.True(result.Length == 2);
+                Assert.True(result.Length == 3);
+            }
+        }
+
+        [Fact]
+        public void TestOnlyNumbers() {
+            using (var reader = WordCounter.CreateStringReader("1 2 3,4, 7777")) {
+                var result = WordCounter.CountWords(reader);
+                Assert.True(result.Length == 0);
             }
         }
 
