@@ -1,7 +1,5 @@
 using System.Linq;
 
-using System.Collections.Generic;
-
 namespace CountWords {
     internal static class Extensions {
         public static bool IsValidWord(this string word) {

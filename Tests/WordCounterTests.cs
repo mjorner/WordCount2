@@ -3,6 +3,7 @@ using Xunit;
 using CountWords;
 using System.Linq;
 using System.IO;
+using System.Collections.Generic;
 
 namespace CountWords.Tests {
     public class WordCounterTests {
@@ -105,6 +106,24 @@ namespace CountWords.Tests {
                 Assert.True(result.Length == 2);
                 Assert.True(result.First().Count == 1);
                 Assert.True(result.First().Word.CompareTo("one") == 0);
+            }
+        }
+
+        [Fact]
+        public void TestCustomEndingChars() {
+            using (var reader = WordCounter.CreateStringReader("we^are^ok^with^hat^not space")) {
+                var result = WordCounter.CountWords(reader, orderByDescending: false, customWordEndingChars: new []{'^'});
+                Assert.True(result.Length == 6);
+            }
+        }
+
+        [Fact]
+        public void TestAddCustomEndingChars() {
+            using (var reader = WordCounter.CreateStringReader("we^are^ok^with^hat^and space")) {
+                List<char> customWordEndingChars = new List<char>(WordCounter.GetDefaultWordEndingChars());
+                customWordEndingChars.Add('^');
+                var result = WordCounter.CountWords(reader, orderByDescending: false, customWordEndingChars: customWordEndingChars);
+                Assert.True(result.Length == 7);
             }
         }
 

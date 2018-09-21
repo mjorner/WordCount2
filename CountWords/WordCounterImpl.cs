@@ -1,16 +1,20 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using System.Text;
 
 namespace CountWords {
     internal sealed class WordCounterImpl {
         public bool OrderByDescending { get; set; } = true;
         public bool MatchCase { get; set; } = false;
+
+        public readonly HashSet<char> CustomWordEndingChars;
         private readonly ICharacterReader Reader;
 
-        public WordCounterImpl(ICharacterReader reader) {
+        public WordCounterImpl(ICharacterReader reader, IEnumerable<char> customWordEndingChars) {
             if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
             Reader = reader;
+            CustomWordEndingChars = customWordEndingChars!=null ? new HashSet<char>(customWordEndingChars) : null;
         }
 
         public IWordCount[] Parse() {
@@ -23,7 +27,7 @@ namespace CountWords {
                 if (!MatchCase) {
                     character = char.ToLower(character);
                 }
-                if (character.IsWordEndingCharacter()) {
+                if (IsWordEndingCharacter(character)) {
                     string word = stringBuilder.ToString();
                     wordCounts.TryAddWord(word);
                     stringBuilder.Clear();
@@ -41,6 +45,13 @@ namespace CountWords {
             else {
                 return wordCounts.ToArray();
             }
+        }
+
+        private bool IsWordEndingCharacter(char character) {
+            if (CustomWordEndingChars != null) {
+                return CustomWordEndingChars.Contains(character);
+            }
+            return character.IsWordEndingCharacter();
         }
     }
 }

@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 namespace CountWords {
     internal sealed class StringReader : ICharacterReader {
         private readonly string SourceString;
