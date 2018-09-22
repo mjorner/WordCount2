@@ -8,6 +8,62 @@ using System.Collections.Generic;
 namespace CountWords.Tests {
     public class WordCounterTests {
         [Fact]
+        public void TestStringReader() {
+            string original = "Programming is a \"Cool thing\"";
+            using (var reader = WordCounter.CreateStringReader(original)) {
+                TestReader(original, reader);
+            }
+        }
+
+        [Fact]
+        public void TestFileReader() {
+            string original = "Programming is a \"Cool thing\"";
+            string filePath = null;
+            Assert.True(WriteTestFile(original, out filePath));
+            using (var reader = WordCounter.CreateFileReader(filePath)) {
+                TestReader(original, reader);
+            }
+        }
+
+        private void TestReader(string original, ICharacterReader reader) {
+            char ch = '\0';
+            string back = "";
+            while(reader.TryReadNextCharacter(out ch)) {
+                back += ch;
+            }
+            Assert.True(original.CompareTo(back) == 0);
+        }
+
+        [Fact]
+        public void TestFileRead() {
+            string filePath = null;
+            Assert.True(WriteTestFile("yes yes yes", out filePath));
+            using (var reader = WordCounter.CreateFileReader(filePath)) {
+                var result = WordCounter.CountWords(reader);
+                Assert.True(result.Length == 1);
+                Assert.True(result.First().Count == 3);
+                Assert.True(result.First().Word.CompareTo("yes") == 0);
+            }
+        }
+
+        private bool WriteTestFile(string s, out string filePath) {
+            filePath = $"{Environment.CurrentDirectory}{Path.DirectorySeparatorChar}testfile.txt";
+            try {
+                if (File.Exists(filePath)) {
+                    File.Delete(filePath);
+                }
+                using (StreamWriter sw = new StreamWriter(filePath)) {
+                    sw.Write(s);
+                }
+                return true;
+            }
+            catch {
+
+            }
+            return false;
+        }
+
+        [Fact]
         public void TestQuotes() {
             using (var reader = WordCounter.CreateStringReader("Programming is a \"Cool thing\"")) {
                 var result = WordCounter.CountWords(reader);
@@ -124,23 +180,6 @@ namespace CountWords.Tests {
                 customWordEndingChars.Add('^');
                 var result = WordCounter.CountWords(reader, orderByDescending: false, customWordEndingChars: customWordEndingChars);
                 Assert.True(result.Length == 7);
-            }
-        }
-
-        [Fact]
-        public void TestFileRead() {
-            string filePath = $"{Environment.CurrentDirectory}{Path.DirectorySeparatorChar}testfile.txt";
-            if (File.Exists(filePath)) {
-                File.Delete(filePath);
-            }
-            using (StreamWriter sw = new StreamWriter(filePath)) {
-                sw.WriteLine("yes yes yes");
-            }
-            using (var reader = WordCounter.CreateFileReader(filePath)) {
-                var result = WordCounter.CountWords(reader);
-                Assert.True(result.Length == 1);
-                Assert.True(result.First().Count == 3);
-                Assert.True(result.First().Word.CompareTo("yes") == 0);
             }
         }
     }
