@@ -18,7 +18,7 @@ namespace CountWords {
         }
 
         public static ICollection<char> GetDefaultWordEndingChars() {
-            return Enumerable.Range(char.MinValue, (char.MaxValue-char.MinValue)).Select(x=> (char)x).Where(x=> x.IsWordEndingCharacter()).ToArray();
+            return Enumerable.Range(char.MinValue, (char.MaxValue-char.MinValue)+1).Select(x=> (char)x).Where(x=> x.IsWordEndingCharacter()).ToArray();
         }
     }
 }

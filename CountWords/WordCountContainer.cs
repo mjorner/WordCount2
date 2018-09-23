@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,6 +7,7 @@ namespace CountWords {
         private readonly Dictionary<string, WordCount> WordCounts = new Dictionary<string, WordCount>();
 
         public void TryAddWord(string word) {
+            if (word == null) { throw new ArgumentNullException(nameof(word)); }
             if (word.IsValidWord()) {
                 WordCount wordCount;
                 if (WordCounts.TryGetValue(word, out wordCount)) {
