@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Tests")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("CountWords.Tests")]
 namespace CountWords {
     internal sealed class WordCounterImpl {
         public bool OrderByDescending { get; set; } = true;

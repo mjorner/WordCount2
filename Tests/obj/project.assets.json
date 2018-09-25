@@ -5735,9 +5735,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/patrik/CountWords2/src/Tests/Tests.csproj",
-      "projectName": "Tests",
-      "projectPath": "/home/patrik/CountWords2/src/Tests/Tests.csproj",
+      "projectUniqueName": "/home/patrik/CountWords2/src/Tests/CountWords.Tests.csproj",
+      "projectName": "CountWords.Tests",
+      "projectPath": "/home/patrik/CountWords2/src/Tests/CountWords.Tests.csproj",
       "packagesPath": "/home/patrik/.nuget/packages/",
       "outputPath": "/home/patrik/CountWords2/src/Tests/obj/",
       "projectStyle": "PackageReference",

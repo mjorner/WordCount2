@@ -686,9 +686,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/patrik/CountWords2/src/CLI/CLI.csproj",
-      "projectName": "CLI",
-      "projectPath": "/home/patrik/CountWords2/src/CLI/CLI.csproj",
+      "projectUniqueName": "/home/patrik/CountWords2/src/CLI/CountWords.CLI.csproj",
+      "projectName": "CountWords.CLI",
+      "projectPath": "/home/patrik/CountWords2/src/CLI/CountWords.CLI.csproj",
       "packagesPath": "/home/patrik/.nuget/packages/",
       "outputPath": "/home/patrik/CountWords2/src/CLI/obj/",
       "projectStyle": "PackageReference",
