@@ -36,6 +36,12 @@ namespace CountWords.Tests {
         }
 
         [Fact]
+        public void TestIsValidWord3() {
+            string s = "stop-light";
+            Assert.True(s.IsValidWord());
+        }
+
+        [Fact]
         public void TestIsEndOfWordChar() {
             char ch = '.';
             Assert.True(ch.IsWordEndingCharacter());
