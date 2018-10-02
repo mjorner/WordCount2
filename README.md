@@ -1,1 +1,1 @@
-Fast word count.
+Fast word count that handles big files.

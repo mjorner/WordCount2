@@ -7,9 +7,11 @@ using System.Text;
 namespace CountWords {
     internal sealed class WordCounterImpl {
         public bool OrderByDescending { get; set; } = true;
+        
         public bool MatchCase { get; set; } = false;
 
         public readonly HashSet<char> CustomWordEndingChars;
+
         private readonly ICharacterReader Reader;
 
         public WordCounterImpl(ICharacterReader reader, IEnumerable<char> customWordEndingChars) {
