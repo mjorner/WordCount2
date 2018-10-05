@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using CountWords;
 using System.Diagnostics;
 
+//dotnet publish -c Release -r win10-x64 --self-contained -o d:/countw/
 namespace CountWords.CLI {
     public sealed class Program {
         public static void Main(string[] args) {
@@ -10,6 +9,7 @@ namespace CountWords.CLI {
             Console.Write("Enter path: ");
             string path = Console.ReadLine();
             try {
+                sw.Reset();
                 sw.Start();
                 using (ICharacterReader reader = WordCounter.CreateFileReader(path)) {
                     IWordCount[] wordCounts = WordCounter.CountWords(reader);

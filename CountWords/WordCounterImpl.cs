@@ -15,8 +15,7 @@ namespace CountWords {
         private readonly ICharacterReader Reader;
 
         public WordCounterImpl(ICharacterReader reader, IEnumerable<char> customWordEndingChars) {
-            if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
-            Reader = reader;
+            Reader = reader ?? throw new ArgumentNullException(nameof(reader));
             CustomWordEndingChars = customWordEndingChars!=null ? new HashSet<char>(customWordEndingChars) : null;
         }
 
