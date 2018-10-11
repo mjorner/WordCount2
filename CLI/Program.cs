@@ -2,6 +2,7 @@
 using System.Diagnostics;
 
 //dotnet publish -c Release -r win10-x64 --self-contained -o d:/countw/
+//dotnet publish -c Release -r linuxmint.17.1-x64 --self-contained -o /home/patrik/CountWordRelease
 namespace CountWords.CLI {
     public sealed class Program {
         public static void Main(string[] args) {
@@ -15,7 +16,6 @@ namespace CountWords.CLI {
                     IWordCount[] wordCounts = WordCounter.CountWords(reader);
                     sw.Stop();  
                     PrintWordCounts(wordCounts, sw);
-
                 }
             }
             catch (Exception e) {
