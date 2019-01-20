@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Text;
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("CountWords.Tests")]
@@ -10,13 +11,13 @@ namespace CountWords {
         
         public bool MatchCase { get; set; } = false;
 
-        public readonly HashSet<char> CustomWordEndingChars;
+        public readonly ImmutableHashSet<char> CustomWordEndingChars;
 
         private readonly ICharacterReader Reader;
 
         public WordCounterImpl(ICharacterReader reader, IEnumerable<char> customWordEndingChars) {
             Reader = reader ?? throw new ArgumentNullException(nameof(reader));
-            CustomWordEndingChars = customWordEndingChars!=null ? new HashSet<char>(customWordEndingChars) : null;
+            CustomWordEndingChars = customWordEndingChars!=null ? ImmutableHashSet.Create<char>(customWordEndingChars.ToArray()) : null;
         }
 
         public IWordCount[] Parse() {
